@@ -4,15 +4,16 @@ import webpack from "webpack";
 import { buildPlugins } from "./buildPligins";
 import { buildLouders } from "./buildLouders";
 import { buildResolve } from "./buildResolves";
+import { buildDevServer } from "./buildDevServer";
 
-export function bildWebpackConfig(
+export function buildWebpackConfig(
   options: BuildOptions
 ): webpack.Configuration {
-  const { paths, mode } = options;
+  const { paths, mode, isDev } = options;
 
   return {
     entry: paths.entry,
-    mode: "development",
+    mode: mode,
     output: {
       filename: "[name].[contenthash].js",
       path: paths.build,
@@ -23,5 +24,7 @@ export function bildWebpackConfig(
       rules: buildLouders(),
     },
     resolve: buildResolve(),
+    devtool: isDev ? "inline-source-map" : undefined,
+    devServer: isDev ? buildDevServer(options) : undefined,
   };
 }
