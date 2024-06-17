@@ -7,5 +7,10 @@ export function buildLouders(): webpack.RuleSetRule[] {
     exclude: /node_modules/,
   };
 
-  return [typescriotLoader];
+  const cssLoader = {
+    test: /\.s[ac]ss$/i,
+    use: ["style-loader", "css-loader", "sass-loader"],
+  };
+
+  return [typescriotLoader, cssLoader];
 }
