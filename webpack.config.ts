@@ -1,33 +1,21 @@
-import path from "path";
 import webpack from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+import { bildWebpackConfig } from "./config/build/buildWebpackConfig";
+import { BuildPatchs } from "./config/build/types/config";
+import path from "path";
 
-const config: webpack.Configuration = {
+const paths: BuildPatchs = {
   entry: path.resolve(__dirname, "src", "index.ts"),
-  mode: "development",
-  output: {
-    filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "build"),
-    clean: true,
-  },
-  plugins: [
-    new webpack.ProgressPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "publick", "index.html"),
-    }),
-  ],
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
+  build: path.resolve(__dirname, "build"),
+  html: path.resolve(__dirname, "publick", "index.html"),
 };
+
+const mode = "developments";
+const isDev = mode === "developments";
+
+const config: webpack.Configuration = bildWebpackConfig({
+  mode: "developments",
+  paths: paths,
+  isDev,
+});
 
 export default config;
