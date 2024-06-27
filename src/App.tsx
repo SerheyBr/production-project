@@ -7,13 +7,14 @@ import './styles/index.scss'
 import { MainPageAsync } from './pages/MainPage/MainPage.async';
 import { AboutPageAsync } from './pages/AboutPage/AboutPage.async';
 import { Suspense, useContext, useState } from 'react';
-import { ThemContext, Theme } from './theme/themeContext';
+// import { ThemContext, Theme } from './theme/themeContext';
 import { useTheme } from './theme/useTheme';
+import { classNames } from './helpers/classNames/classNames';
 
 export const App = () => {
 	const {theme, toggleThem} = useTheme()
 	return (
-		<div className={`app ${theme}`}>
+		<div className={classNames('app', {hover: true, selected: true}, [theme])}>
 			<button onClick={toggleThem} >THEM</button>
 			<Link to={'/'}>Main</Link>
 			<Link to={'/about'}>About</Link>
