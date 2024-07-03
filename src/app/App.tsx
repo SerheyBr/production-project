@@ -7,6 +7,7 @@ import { Navbar } from 'widgets/Navbar';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { Theme } from './providers/ThemeProvider/lib/ThemeContext';
 import { useContext } from 'react';
+import { Sidebar } from 'widgets/Sidebar';
 
 
 
@@ -18,8 +19,11 @@ export const App = () => {
 		<div className={classNames('app', {hover: true, selected: true}, [theme])}>
 			{/* <button onClick={toggleThem} >THEM</button> */}
 			<Navbar />
-			<AppRouter/>
-		
+			<div className='content-page'>
+				<Sidebar/>
+				<AppRouter/>
+			</div>
+			
 		</div>
 	);
 };
